@@ -1,0 +1,1759 @@
+{
+  "id": "fbfda302-e2f5-4486-9ce5-82a4321f0940",
+  "prevId": "2f1a0ab4-e099-4cea-ace3-0f1574e03666",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.adminusers": {
+      "name": "adminusers",
+      "schema": "",
+      "columns": {
+        "adminuserid": {
+          "name": "adminuserid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userid": {
+          "name": "userid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "permissions": {
+          "name": "permissions",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "adminusers_userid_fkey": {
+          "name": "adminusers_userid_fkey",
+          "tableFrom": "adminusers",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userid"
+          ],
+          "columnsTo": [
+            "userid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.announcements": {
+      "name": "announcements",
+      "schema": "",
+      "columns": {
+        "announcementid": {
+          "name": "announcementid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "companyid": {
+          "name": "companyid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isactive": {
+          "name": "isactive",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "startdate": {
+          "name": "startdate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "enddate": {
+          "name": "enddate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "announcements_companyid_fkey": {
+          "name": "announcements_companyid_fkey",
+          "tableFrom": "announcements",
+          "tableTo": "companies",
+          "columnsFrom": [
+            "companyid"
+          ],
+          "columnsTo": [
+            "companyid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.categories": {
+      "name": "categories",
+      "schema": "",
+      "columns": {
+        "categoryid": {
+          "name": "categoryid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "image": {
+          "name": "image",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "categoryname": {
+          "name": "categoryname",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parentcategoryid": {
+          "name": "parentcategoryid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "categories_parentcategoryid_fkey": {
+          "name": "categories_parentcategoryid_fkey",
+          "tableFrom": "categories",
+          "tableTo": "categories",
+          "columnsFrom": [
+            "parentcategoryid"
+          ],
+          "columnsTo": [
+            "categoryid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.combo_price_analysis": {
+      "name": "combo_price_analysis",
+      "schema": "",
+      "columns": {
+        "comboid": {
+          "name": "comboid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "combo_name": {
+          "name": "combo_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "combo_price": {
+          "name": "combo_price",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_individual_price": {
+          "name": "total_individual_price",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_savings": {
+          "name": "total_savings",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "number_of_products": {
+          "name": "number_of_products",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.comboitems": {
+      "name": "comboitems",
+      "schema": "",
+      "columns": {
+        "comboitemid": {
+          "name": "comboitemid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "comboid": {
+          "name": "comboid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "productid": {
+          "name": "productid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_comboitems_combo": {
+          "name": "idx_comboitems_combo",
+          "columns": [
+            {
+              "expression": "comboid",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "comboitems_comboid_fkey": {
+          "name": "comboitems_comboid_fkey",
+          "tableFrom": "comboitems",
+          "tableTo": "combos",
+          "columnsFrom": [
+            "comboid"
+          ],
+          "columnsTo": [
+            "comboid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "comboitems_productid_fkey": {
+          "name": "comboitems_productid_fkey",
+          "tableFrom": "comboitems",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productid"
+          ],
+          "columnsTo": [
+            "productid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.combos": {
+      "name": "combos",
+      "schema": "",
+      "columns": {
+        "comboid": {
+          "name": "comboid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "companyid": {
+          "name": "companyid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "name": "price",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isactive": {
+          "name": "isactive",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "startdate": {
+          "name": "startdate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "enddate": {
+          "name": "enddate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "company_id_fkey": {
+          "name": "company_id_fkey",
+          "tableFrom": "combos",
+          "tableTo": "companies",
+          "columnsFrom": [
+            "companyid"
+          ],
+          "columnsTo": [
+            "companyid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.companies": {
+      "name": "companies",
+      "schema": "",
+      "columns": {
+        "companyid": {
+          "name": "companyid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "companyname": {
+          "name": "companyname",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "numeric(10, 8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "numeric(11, 8)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "licensecompliance": {
+          "name": "licensecompliance",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "businesscategories": {
+          "name": "businesscategories",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isactive": {
+          "name": "isactive",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.companyregistrationrequests": {
+      "name": "companyregistrationrequests",
+      "schema": "",
+      "columns": {
+        "requestid": {
+          "name": "requestid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "companyid": {
+          "name": "companyid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "submittedbyuserid": {
+          "name": "submittedbyuserid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "applicationdate": {
+          "name": "applicationdate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "adminuserid": {
+          "name": "adminuserid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notes": {
+          "name": "notes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "companyregistrationrequests_adminuserid_fkey": {
+          "name": "companyregistrationrequests_adminuserid_fkey",
+          "tableFrom": "companyregistrationrequests",
+          "tableTo": "adminusers",
+          "columnsFrom": [
+            "adminuserid"
+          ],
+          "columnsTo": [
+            "adminuserid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "companyregistrationrequests_companyid_fkey": {
+          "name": "companyregistrationrequests_companyid_fkey",
+          "tableFrom": "companyregistrationrequests",
+          "tableTo": "companies",
+          "columnsFrom": [
+            "companyid"
+          ],
+          "columnsTo": [
+            "companyid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "companyregistrationrequests_submittedbyuserid_fkey": {
+          "name": "companyregistrationrequests_submittedbyuserid_fkey",
+          "tableFrom": "companyregistrationrequests",
+          "tableTo": "users",
+          "columnsFrom": [
+            "submittedbyuserid"
+          ],
+          "columnsTo": [
+            "userid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.companyusers": {
+      "name": "companyusers",
+      "schema": "",
+      "columns": {
+        "companyuserid": {
+          "name": "companyuserid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userid": {
+          "name": "userid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "companyid": {
+          "name": "companyid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "companyusers_userid_fkey": {
+          "name": "companyusers_userid_fkey",
+          "tableFrom": "companyusers",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userid"
+          ],
+          "columnsTo": [
+            "userid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "companyusers_companyid_fkey": {
+          "name": "companyusers_companyid_fkey",
+          "tableFrom": "companyusers",
+          "tableTo": "companies",
+          "columnsFrom": [
+            "companyid"
+          ],
+          "columnsTo": [
+            "companyid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.notifications": {
+      "name": "notifications",
+      "schema": "",
+      "columns": {
+        "notificationid": {
+          "name": "notificationid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userid": {
+          "name": "userid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notificationtype": {
+          "name": "notificationtype",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "message": {
+          "name": "message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "relatedentityid": {
+          "name": "relatedentityid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isread": {
+          "name": "isread",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sentat": {
+          "name": "sentat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_notifications_user": {
+          "name": "idx_notifications_user",
+          "columns": [
+            {
+              "expression": "userid",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "notifications_userid_fkey": {
+          "name": "notifications_userid_fkey",
+          "tableFrom": "notifications",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userid"
+          ],
+          "columnsTo": [
+            "userid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.offerapplications": {
+      "name": "offerapplications",
+      "schema": "",
+      "columns": {
+        "offerappid": {
+          "name": "offerappid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "offerid": {
+          "name": "offerid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "productid": {
+          "name": "productid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "comboid": {
+          "name": "comboid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "offerapplications_offerid_fkey": {
+          "name": "offerapplications_offerid_fkey",
+          "tableFrom": "offerapplications",
+          "tableTo": "offers",
+          "columnsFrom": [
+            "offerid"
+          ],
+          "columnsTo": [
+            "offerid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "offerapplications_productid_fkey": {
+          "name": "offerapplications_productid_fkey",
+          "tableFrom": "offerapplications",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productid"
+          ],
+          "columnsTo": [
+            "productid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "offerapplications_comboid_fkey": {
+          "name": "offerapplications_comboid_fkey",
+          "tableFrom": "offerapplications",
+          "tableTo": "combos",
+          "columnsFrom": [
+            "comboid"
+          ],
+          "columnsTo": [
+            "comboid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.offers": {
+      "name": "offers",
+      "schema": "",
+      "columns": {
+        "offerid": {
+          "name": "offerid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "discounttype": {
+          "name": "discounttype",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "discountvalue": {
+          "name": "discountvalue",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "startdate": {
+          "name": "startdate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "enddate": {
+          "name": "enddate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isactive": {
+          "name": "isactive",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.orderitems": {
+      "name": "orderitems",
+      "schema": "",
+      "columns": {
+        "orderitemid": {
+          "name": "orderitemid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "orderid": {
+          "name": "orderid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "productid": {
+          "name": "productid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "comboid": {
+          "name": "comboid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "unitprice": {
+          "name": "unitprice",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "discountapplied": {
+          "name": "discountapplied",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ordertype": {
+          "name": "ordertype",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_orderitems_combo": {
+          "name": "idx_orderitems_combo",
+          "columns": [
+            {
+              "expression": "comboid",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_orderitems_order": {
+          "name": "idx_orderitems_order",
+          "columns": [
+            {
+              "expression": "orderid",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_orderitems_product": {
+          "name": "idx_orderitems_product",
+          "columns": [
+            {
+              "expression": "productid",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "orderitems_orderid_fkey": {
+          "name": "orderitems_orderid_fkey",
+          "tableFrom": "orderitems",
+          "tableTo": "orders",
+          "columnsFrom": [
+            "orderid"
+          ],
+          "columnsTo": [
+            "orderid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "orderitems_productid_fkey": {
+          "name": "orderitems_productid_fkey",
+          "tableFrom": "orderitems",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productid"
+          ],
+          "columnsTo": [
+            "productid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "orderitems_comboid_fkey": {
+          "name": "orderitems_comboid_fkey",
+          "tableFrom": "orderitems",
+          "tableTo": "combos",
+          "columnsFrom": [
+            "comboid"
+          ],
+          "columnsTo": [
+            "comboid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.orders": {
+      "name": "orders",
+      "schema": "",
+      "columns": {
+        "orderid": {
+          "name": "orderid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userid": {
+          "name": "userid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paymentstatus": {
+          "name": "paymentstatus",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paymentmethod": {
+          "name": "paymentmethod",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "totalamount": {
+          "name": "totalamount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "orders_userid_fkey": {
+          "name": "orders_userid_fkey",
+          "tableFrom": "orders",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userid"
+          ],
+          "columnsTo": [
+            "userid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.paymentgateways": {
+      "name": "paymentgateways",
+      "schema": "",
+      "columns": {
+        "paymentgatewayid": {
+          "name": "paymentgatewayid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "gatewayname": {
+          "name": "gatewayname",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "apikey": {
+          "name": "apikey",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "apisecret": {
+          "name": "apisecret",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isactive": {
+          "name": "isactive",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.paymentmethods": {
+      "name": "paymentmethods",
+      "schema": "",
+      "columns": {
+        "paymentmethodid": {
+          "name": "paymentmethodid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "methodtype": {
+          "name": "methodtype",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "details": {
+          "name": "details",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isdefault": {
+          "name": "isdefault",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.productinventory": {
+      "name": "productinventory",
+      "schema": "",
+      "columns": {
+        "inventoryid": {
+          "name": "inventoryid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "productid": {
+          "name": "productid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "quantityavailable": {
+          "name": "quantityavailable",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lastupdated": {
+          "name": "lastupdated",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "productinventory_productid_fkey": {
+          "name": "productinventory_productid_fkey",
+          "tableFrom": "productinventory",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productid"
+          ],
+          "columnsTo": [
+            "productid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.products": {
+      "name": "products",
+      "schema": "",
+      "columns": {
+        "productid": {
+          "name": "productid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "categoryid": {
+          "name": "categoryid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "companyid": {
+          "name": "companyid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "baseprice": {
+          "name": "baseprice",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdby": {
+          "name": "createdby",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 1
+        },
+        "inqwerty": {
+          "name": "inqwerty",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isactive": {
+          "name": "isactive",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_products_category": {
+          "name": "idx_products_category",
+          "columns": [
+            {
+              "expression": "categoryid",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "products_categoryid_fkey": {
+          "name": "products_categoryid_fkey",
+          "tableFrom": "products",
+          "tableTo": "categories",
+          "columnsFrom": [
+            "categoryid"
+          ],
+          "columnsTo": [
+            "categoryid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "created_by_userid_fkey": {
+          "name": "created_by_userid_fkey",
+          "tableFrom": "products",
+          "tableTo": "users",
+          "columnsFrom": [
+            "createdby"
+          ],
+          "columnsTo": [
+            "userid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "company_id_fkey": {
+          "name": "company_id_fkey",
+          "tableFrom": "products",
+          "tableTo": "companies",
+          "columnsFrom": [
+            "companyid"
+          ],
+          "columnsTo": [
+            "companyid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.reports": {
+      "name": "reports",
+      "schema": "",
+      "columns": {
+        "reportid": {
+          "name": "reportid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "companyid": {
+          "name": "companyid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reporttype": {
+          "name": "reporttype",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parameters": {
+          "name": "parameters",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "generatedat": {
+          "name": "generatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "reports_companyid_fkey": {
+          "name": "reports_companyid_fkey",
+          "tableFrom": "reports",
+          "tableTo": "companies",
+          "columnsFrom": [
+            "companyid"
+          ],
+          "columnsTo": [
+            "companyid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.transactions": {
+      "name": "transactions",
+      "schema": "",
+      "columns": {
+        "transactionid": {
+          "name": "transactionid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "orderid": {
+          "name": "orderid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "companyid": {
+          "name": "companyid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "transactiondate": {
+          "name": "transactiondate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paymentgatewayid": {
+          "name": "paymentgatewayid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paymentstatus": {
+          "name": "paymentstatus",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_transactions_order": {
+          "name": "idx_transactions_order",
+          "columns": [
+            {
+              "expression": "orderid",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "transactions_orderid_fkey": {
+          "name": "transactions_orderid_fkey",
+          "tableFrom": "transactions",
+          "tableTo": "orders",
+          "columnsFrom": [
+            "orderid"
+          ],
+          "columnsTo": [
+            "orderid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "transactions_companyid_fkey": {
+          "name": "transactions_companyid_fkey",
+          "tableFrom": "transactions",
+          "tableTo": "companies",
+          "columnsFrom": [
+            "companyid"
+          ],
+          "columnsTo": [
+            "companyid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "userid": {
+          "name": "userid",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phonenumber": {
+          "name": "phonenumber",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "profilepicture": {
+          "name": "profilepicture",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "usertype": {
+          "name": "usertype",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "supportid": {
+          "name": "supportid",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "geolocationradius": {
+          "name": "geolocationradius",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notificationsettings": {
+          "name": "notificationsettings",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdat": {
+          "name": "createdat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedat": {
+          "name": "updatedat",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_key": {
+          "name": "users_email_key",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
